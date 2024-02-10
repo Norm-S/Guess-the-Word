@@ -1,5 +1,5 @@
 // The unordered list where the player’s guessed letters will appear.
-const guessedLetters = document.querySelector(".guessed-letters");
+const guessedLettersDisplay = document.querySelector(".guessed-letters");
 
 // The button with the text “Guess!” in it.
 const guess = document.querySelector(".guess");
@@ -23,6 +23,17 @@ const message = document.querySelector(".message");
 const playAgain = document.querySelector(".play-again");
 
 const word = "magnolia";
+const guessedLetters = [];
+
+const makeGuess = function (char) {
+  const c = char.toUpperCase();
+  if (guessedLetters.includes(c)) {
+    message.innerText = `You've already guessed ${c} already, try again.`;
+  } else {
+    guessedLetters.push(c);
+    console.log(guessedLetters);
+  }
+};
 
 const updateWordInProgress = function (word) {
   const censor = "●";
@@ -33,6 +44,19 @@ const updateWordInProgress = function (word) {
   wordInProgress.innerText = placeholder.join("");
 };
 
+const validateInput = function (input) {
+  const acceptedLetter = /[a-zA-Z]/;
+  if (input.length === 0) {
+    message.innerText = "Please enter a character";
+  } else if (input.length > 1) {
+    message.innerText = "Please on enter one character";
+  } else if (!input.match(acceptedLetter)) {
+    message.innerText = "Please only enter an alphabetical character";
+  } else {
+    return input;
+  }
+};
+
 updateWordInProgress(word);
 
 guess.addEventListener("click", function (e) {
@@ -40,4 +64,11 @@ guess.addEventListener("click", function (e) {
   const input = letter.value;
   console.log(input);
   letter.value = "";
+
+  message.innerText = "";
+  const result = validateInput(input);
+  console.log(result);
+  if (result !== undefined) {
+    makeGuess(result);
+  }
 });
