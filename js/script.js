@@ -33,10 +33,11 @@ const makeGuess = function (char) {
     guessedLetters.push(c);
     // console.log(guessedLetters);
     updateGuessedLetterDisplay();
+    updateWordInProgress(guessedLetters);
   }
 };
 
-const updateWordInProgress = function (word) {
+const addPlaceholder = function (word) {
   const censor = "●";
   const placeholder = [];
   for (let char of word) {
@@ -67,7 +68,29 @@ const updateGuessedLetterDisplay = function () {
   }
 };
 
-updateWordInProgress(word);
+const updateWordInProgress = function (guessedLetters) {
+  const wordUpper = word.toUpperCase();
+  const wordArray = wordUpper.split("");
+
+  // console.log(wordArray);
+
+  for (let letter of guessedLetters) {
+    if (wordArray.includes(letter)) {
+      let inProgressDisplay = wordInProgress.innerText.split("");
+
+      wordArray.forEach(function (char, i) {
+        if (char === letter) {
+          inProgressDisplay[i] = letter;
+        }
+      });
+
+      wordInProgress.innerText = inProgressDisplay.join("");
+    }
+  }
+};
+
+addPlaceholder(word);
+updateWordInProgress(guessedLetters);
 
 guess.addEventListener("click", function (e) {
   e.preventDefault();
