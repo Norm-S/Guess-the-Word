@@ -31,7 +31,8 @@ const makeGuess = function (char) {
     message.innerText = `You've already guessed ${c} already, try again.`;
   } else {
     guessedLetters.push(c);
-    console.log(guessedLetters);
+    // console.log(guessedLetters);
+    updateGuessedLetterDisplay();
   }
 };
 
@@ -54,6 +55,15 @@ const validateInput = function (input) {
     message.innerText = "Please only enter an alphabetical character";
   } else {
     return input;
+  }
+};
+
+const updateGuessedLetterDisplay = function () {
+  guessedLettersDisplay.innerHTML = "";
+  for (let letter of guessedLetters) {
+    let li = document.createElement("li");
+    li.innerText = letter;
+    guessedLettersDisplay.append(li);
   }
 };
 
