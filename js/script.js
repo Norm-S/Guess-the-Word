@@ -72,21 +72,15 @@ const updateWordInProgress = function (guessedLetters) {
   const wordUpper = word.toUpperCase();
   const wordArray = wordUpper.split("");
 
-  // console.log(wordArray);
-
+  let inProgressDisplay = wordInProgress.innerText.split("");
   for (let letter of guessedLetters) {
-    if (wordArray.includes(letter)) {
-      let inProgressDisplay = wordInProgress.innerText.split("");
-
-      wordArray.forEach(function (char, i) {
-        if (char === letter) {
-          inProgressDisplay[i] = letter;
-        }
-      });
-
-      wordInProgress.innerText = inProgressDisplay.join("");
-    }
+    wordArray.forEach(function (char, i) {
+      if (letter === char) {
+        inProgressDisplay[i] = char;
+      }
+    });
   }
+  wordInProgress.innerText = inProgressDisplay.join("");
   checkWinCondition();
 };
 
