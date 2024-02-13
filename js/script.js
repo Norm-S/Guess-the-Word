@@ -69,17 +69,17 @@ const updateGuessedLetterDisplay = function () {
 };
 
 const updateWordInProgress = function (guessedLetters) {
-  const wordUpper = word.toUpperCase();
-  const wordArray = wordUpper.split("");
+  const wordArray = word.toUpperCase().split("");
 
-  let inProgressDisplay = wordInProgress.innerText.split("");
-  for (let letter of guessedLetters) {
-    wordArray.forEach(function (char, i) {
-      if (letter === char) {
-        inProgressDisplay[i] = char;
-      }
-    });
-  }
+  const guessed = new Set(guessedLetters);
+  const inProgressDisplay = wordInProgress.innerText.split("");
+
+  wordArray.forEach(function (letter, i) {
+    if (guessed.has(letter)) {
+      inProgressDisplay[i] = letter;
+    }
+  });
+
   wordInProgress.innerText = inProgressDisplay.join("");
   checkWinCondition();
 };
