@@ -87,6 +87,14 @@ const updateWordInProgress = function (guessedLetters) {
       wordInProgress.innerText = inProgressDisplay.join("");
     }
   }
+  checkWinCondition();
+};
+
+const checkWinCondition = function () {
+  if (wordInProgress.innerText === word.toUpperCase()) {
+    message.classList.add("win");
+    message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
+  }
 };
 
 addPlaceholder(word);
