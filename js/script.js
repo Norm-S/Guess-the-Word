@@ -22,6 +22,7 @@ const message = document.querySelector(".message");
 // The hidden button that will appear prompting the player to play again.
 const playAgain = document.querySelector(".play-again");
 
+const reaminingGuesses = 8;
 const word = "magnolia";
 const guessedLetters = [];
 
@@ -62,7 +63,7 @@ const validateInput = function (input) {
 const updateGuessedLetterDisplay = function () {
   guessedLettersDisplay.innerHTML = "";
   for (let letter of guessedLetters) {
-    let li = document.createElement("li");
+    const li = document.createElement("li");
     li.innerText = letter;
     guessedLettersDisplay.append(li);
   }
@@ -83,6 +84,8 @@ const updateWordInProgress = function (guessedLetters) {
   wordInProgress.innerText = inProgressDisplay.join("");
   checkWinCondition();
 };
+
+const countGuesses = function (guess) {};
 
 const checkWinCondition = function () {
   if (wordInProgress.innerText === word.toUpperCase()) {
