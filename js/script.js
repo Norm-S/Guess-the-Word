@@ -67,7 +67,7 @@ const validateInput = function (input) {
   if (input.length === 0) {
     message.innerText = "Please enter a character";
   } else if (input.length > 1) {
-    message.innerText = "Please on enter one character";
+    message.innerText = "Please only enter one character";
   } else if (!input.match(acceptedLetter)) {
     message.innerText = "Please only enter an alphabetical character";
   } else {
@@ -104,9 +104,9 @@ const countRemainingGuesses = function (guess) {
   const wordUpper = word.toUpperCase();
   if (!wordUpper.includes(guess)) {
     remainingGuesses--;
-    message.innerText = `The word does not contain an ${guess}.`;
+    message.innerText = `The word does not contain ${guess}.`;
   } else {
-    message.innerText = `The word does contain an ${guess}.`;
+    message.innerText = `The word does contain ${guess}.`;
   }
 
   if (remainingGuesses <= 0) {
