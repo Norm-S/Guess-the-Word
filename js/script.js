@@ -133,12 +133,12 @@ updateWordInProgress(guessedLetters);
 guess.addEventListener("click", function (e) {
   e.preventDefault();
   const input = letter.value;
-  console.log(input);
+  // console.log(input);
   letter.value = "";
 
   message.innerText = "";
   const result = validateInput(input);
-  console.log(result);
+  // console.log(result);
   if (result !== undefined) {
     makeGuess(result);
   }
@@ -151,3 +151,21 @@ const startOver = function () {
 
   playAgain.classList.remove("hide");
 };
+
+playAgain.addEventListener("click", function () {
+  message.classList.remove("win");
+  message.innerText = "";
+  guessedLettersDisplay.innerHTML = "";
+
+  remainingGuesses = 8;
+  guessedLetters.length = 0;
+  span.innerText = `${remainingGuesses} guesses`;
+
+  guess.classList.remove("hide");
+  remaining.classList.remove("hide");
+  guessedLettersDisplay.classList.remove("hide");
+
+  playAgain.classList.add("hide");
+
+  getWord();
+});
