@@ -23,8 +23,22 @@ const message = document.querySelector(".message");
 const playAgain = document.querySelector(".play-again");
 
 let remainingGuesses = 8;
-const word = "magnolia";
+let word = "magnolia";
 const guessedLetters = [];
+
+const getWord = async function () {
+  const res = await fetch(
+    "https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt"
+  );
+
+  const words = await res.text();
+  // console.log(words);
+
+  const wordArray = words.trim().split("\n");
+  const randomIndex = Math.floor(Math.random() * wordArray.length);
+  word = wordArray[randomIndex].trim();
+  addPlaceholder(word);
+};
 
 const makeGuess = function (char) {
   const c = char.toUpperCase();
@@ -112,7 +126,7 @@ const checkWinCondition = function () {
   }
 };
 
-addPlaceholder(word);
+getWord();
 updateWordInProgress(guessedLetters);
 
 guess.addEventListener("click", function (e) {
