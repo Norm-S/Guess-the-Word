@@ -43,7 +43,7 @@ const getWord = async function () {
 const makeGuess = function (char) {
   const c = char.toUpperCase();
   if (guessedLetters.includes(c)) {
-    message.innerText = `You've already guessed ${c} already, try again.`;
+    message.innerText = `You've already guessed ${c}, try again.`;
   } else {
     guessedLetters.push(c);
     // console.log(guessedLetters);
